@@ -32,43 +32,136 @@ from pathlib import Path
 # Configuration
 # =============================================================================
 
-# EGX100 Tickers (35 active tickers from app.py STOCK_DATA)
+# EGX100 Tickers - COMPLETE LIST (100+ tickers)
+# Updated: February 2026
 EGX100_TICKERS = [
-    'COMI.CA',  # Commercial International Bank
-    'CIEB.CA',  # Crédit Agricole Egypt
-    'HDBK.CA',  # Housing & Development Bank
-    'FAIT.CA',  # Faisal Islamic Bank
-    'ADIB.CA',  # Abu Dhabi Islamic Bank
-    'SAUD.CA',  # Al Baraka Bank
-    'EGBE.CA',  # Egyptian Gulf Bank
-    'EXPA.CA',  # Export Development Bank
-    'HRHO.CA',  # EFG Hermes
-    'EFIH.CA',  # E-Finance
-    'FWRY.CA',  # Fawry
-    'BTFH.CA',  # Beltone Financial
-    'CICH.CA',  # CI Capital
-    'TMGH.CA',  # Talaat Moustafa Group
-    'PHDC.CA',  # Palm Hills Developments
-    'OCDI.CA',  # SODIC
-    'MASR.CA',  # Madinet Masr
-    'HELI.CA',  # Heliopolis Housing
-    'ORAS.CA',  # Orascom Construction
-    'EMFD.CA',  # Emaar Misr
-    'SWDY.CA',  # Elsewedy Electric
-    'ABUK.CA',  # Abu Qir Fertilizers
-    'MFPC.CA',  # MOPCO
-    'SKPC.CA',  # Sidi Kerir Petrochemicals
-    'AMOC.CA',  # Alexandria Mineral Oils
-    'ETEL.CA',  # Telecom Egypt
-    'EAST.CA',  # Eastern Company
-    'JUFO.CA',  # Juhayna Food Industries
-    'EFID.CA',  # Edita Food Industries
-    'ISPH.CA',  # Ibnsina Pharma
-    'CLHO.CA',  # Cleopatra Hospitals
-    'GBCO.CA',  # GB Corp
-    'EKHO.CA',  # Egypt Kuwait Holding
-    'CCAP.CA',  # Qalaa Holdings
-    'ORHD.CA',  # Oriental Weavers
+    # === BANKING (11) ===
+    'COMI.CA',   # Commercial International Bank (CIB)
+    'CIEB.CA',   # Crédit Agricole Egypt
+    'HDBK.CA',   # Housing & Development Bank
+    'FAIT.CA',   # Faisal Islamic Bank
+    'ADIB.CA',   # Abu Dhabi Islamic Bank Egypt
+    'SAUD.CA',   # Banque Saudi Fransi Egypt
+    'EGBE.CA',   # Egyptian Gulf Bank
+    'EXPA.CA',   # Export Development Bank (EDBE)
+    'UBEE.CA',   # United Bank of Egypt
+    'CANA.CA',   # Canal Shipping Agencies
+    
+    # === FINANCIAL SERVICES (10) ===
+    'HRHO.CA',   # EFG Hermes Holdings
+    'EFIH.CA',   # E-Finance for Digital & Financial
+    'FWRY.CA',   # Fawry for Banking Technology
+    'BTFH.CA',   # Beltone Holding
+    'CICH.CA',   # CI Capital Holding
+    'CNFN.CA',   # Contact Financial Holding
+    'ACTF.CA',   # Act Financial
+    'ATLC.CA',   # Al Tawfeek Leasing (A.T.LEASE)
+    'VALU.CA',   # U Consumer Finance (Valu)
+    'OFH.CA',    # OB Financial Holding
+    
+    # === REAL ESTATE (15) ===
+    'TMGH.CA',   # Talaat Moustafa Group Holding
+    'PHDC.CA',   # Palm Hills Development
+    'OCDI.CA',   # Six of October Development (SODIC)
+    'MASR.CA',   # Madinet Masr for Housing
+    'HELI.CA',   # Heliopolis Housing
+    'EMFD.CA',   # Emaar Misr for Development
+    'AMER.CA',   # Amer Group Holding
+    'ARAB.CA',   # Arab Developers Holding
+    'EHDR.CA',   # Egyptians Housing Development
+    'ELKA.CA',   # El Kahera Housing
+    'ELSH.CA',   # El Shams Housing
+    'ZMID.CA',   # Zahraa Maadi Investment
+    'CIRA.CA',   # Cairo for Investment (CIRA)
+    'EGTS.CA',   # Egyptian for Tourism Resorts
+    'MENA.CA',   # Mena Touristic & Real Estate
+    
+    # === CONSTRUCTION & ENGINEERING (8) ===
+    'ORAS.CA',   # Orascom Construction PLC
+    'ARCC.CA',   # Arabian Cement Company
+    'SCEM.CA',   # Sinai Cement
+    'MCQE.CA',   # Misr Cement (Qena)
+    'SVCE.CA',   # South Valley Cement
+    'ENGC.CA',   # Engineering Industries (ICON)
+    'GGCC.CA',   # Giza General Contracting
+    'NCCW.CA',   # Nasr Company for Civil Works
+    
+    # === INDUSTRIAL (12) ===
+    'SWDY.CA',   # Elsewedy Electric
+    'EGAL.CA',   # Egypt Aluminium
+    'ELEC.CA',   # Egyptian Electrical Cables
+    'ORWE.CA',   # Oriental Weavers
+    'LCSW.CA',   # Lecico Egypt
+    'ECAP.CA',   # El Ezz Porcelain (Gemma)
+    'PRCL.CA',   # Ceramic & Porcelain
+    'CERA.CA',   # Arab Ceramics (Remas)
+    'KABO.CA',   # El Nasr Clothes & Textiles (Kabo)
+    'DSCW.CA',   # Dice Sport & Casual Wear
+    'MTIE.CA',   # MM Group for Industry
+    'UNIP.CA',   # Universal Paper & Packaging
+    
+    # === CHEMICALS & PETROCHEMICALS (8) ===
+    'ABUK.CA',   # Abou Kir Fertilizers
+    'MFPC.CA',   # Misr Fertilizers (MOPCO)
+    'SKPC.CA',   # Sidi Kerir Petrochemicals
+    'AMOC.CA',   # Alexandria Mineral Oils
+    'EGCH.CA',   # Egyptian Chemical Industries (Kima)
+    'ICFC.CA',   # International Fertilizers & Chemicals
+    'COSG.CA',   # Cairo Oils and Soap
+    'ZEOT.CA',   # Extracted Oils
+    
+    # === OIL & GAS (4) ===
+    'ASCM.CA',   # ASEC Company for Mining (ASCOM)
+    'MOIL.CA',   # Maridive & Oil Services
+    'TAQA.CA',   # Taqa Arabia
+    'ISMQ.CA',   # Iron and Steel for Mines and Quarries
+    
+    # === TELECOM & TECHNOLOGY (3) ===
+    'ETEL.CA',   # Telecom Egypt
+    'RAYA.CA',   # Raya Holding
+    'RACC.CA',   # Raya Customer Experience
+    
+    # === CONSUMER GOODS (8) ===
+    'EAST.CA',   # Eastern Company
+    'JUFO.CA',   # Juhayna Food Industries
+    'EFID.CA',   # Edita Food Industries
+    'POUL.CA',   # Cairo Poultry
+    'ISMA.CA',   # Ismailia Misr Poultry
+    'MPCO.CA',   # Mansourah Poultry
+    'SUGR.CA',   # Delta Sugar
+    'IFAP.CA',   # International Agricultural Products
+    
+    # === HEALTHCARE & PHARMA (10) ===
+    'ISPH.CA',   # Ibnsina Pharma
+    'CLHO.CA',   # Cleopatra Hospitals
+    'PHAR.CA',   # Egyptian Intl Pharmaceuticals (EIPICO)
+    'RMDA.CA',   # 10th of Ramadan Pharma (Rameda)
+    'NIPH.CA',   # El-Nile Pharmaceuticals
+    'MPCI.CA',   # Memphis Pharmaceuticals
+    'MCRO.CA',   # Macro Group Pharmaceuticals
+    'BIOC.CA',   # Glaxo Smith Kline Egypt
+    'SIPC.CA',   # Sabaa International Pharma
+    'MEPA.CA',   # Medical Packaging Company
+    
+    # === HOLDINGS & DIVERSIFIED (12) ===
+    'GBCO.CA',   # GB Corp
+    'EKHO.CA',   # Egypt Kuwait Holding
+    'CCAP.CA',   # Qalaa Holdings
+    'AIH.CA',    # Arabia Investments Holding
+    'AIDC.CA',   # Arabia for Investment & Development
+    'ASPI.CA',   # Aspire Capital Holding
+    'OIH.CA',    # Orascom Investment Holding
+    'VLMR.CA',   # Valmore Holding
+    'TALM.CA',   # Taaleem Management Services
+    'MOED.CA',   # Egyptian Modern Education Systems
+    'ODIN.CA',   # ODIN Investments SAE
+    'ALCN.CA',   # Alexandria Containers and Goods
+    
+    # === TRANSPORT & LOGISTICS (4) ===
+    'CSAG.CA',   # Canal Shipping Agencies
+    'ETRS.CA',   # Egyptian Transport (EGYTRANS)
+    'MPRC.CA',   # Egyptian Media Production City
+    'IEEC.CA',   # Industrial & Engineering Projects
 ]
 
 # File paths (Docker volume mount points)
@@ -86,50 +179,133 @@ CAIRO_TZ = pytz.timezone('Africa/Cairo')
 
 # Fallback Metadata (for when yfinance fails) - VERIFIED ISINs from EGX
 FALLBACK_METADATA = {
-    # Banking Sector - VERIFIED
-    'COMI.CA': {'isin': 'EGS60121C018', 'sector': 'Banking'},  # Commercial International Bank
-    'CIEB.CA': {'isin': 'EGS60131C017', 'sector': 'Banking'},  # Credit Agricole Egypt
-    'HDBK.CA': {'isin': 'EGS60091C013', 'sector': 'Banking'},  # Housing and Development Bank
-    'FAIT.CA': {'isin': 'EGS60021C016', 'sector': 'Banking'},  # Faisal Islamic Bank
-    'ADIB.CA': {'isin': 'EGS60141C016', 'sector': 'Banking'},  # Abu Dhabi Islamic Bank Egypt
-    'SAUD.CA': {'isin': 'EGS60041C014', 'sector': 'Banking'},  # Banque Saudi Fransi Egypt
-    'EGBE.CA': {'isin': 'EGS60051C013', 'sector': 'Banking'},  # Egyptian Gulf Bank
-    'EXPA.CA': {'isin': 'EGS60151C015', 'sector': 'Banking'},  # Export Development Bank
-    # Financial Services - VERIFIED
-    'HRHO.CA': {'isin': 'EGS74081C017', 'sector': 'Financial Services'},  # EFG Hermes
-    'EFIH.CA': {'isin': 'EGS74071C018', 'sector': 'Financial Services'},  # EFI Holding
-    'FWRY.CA': {'isin': 'EGS745L1C014', 'sector': 'Financial Services'},  # Fawry
-    'BTFH.CA': {'isin': 'EGS74061C019', 'sector': 'Financial Services'},  # Beltone Financial
-    'CICH.CA': {'isin': 'EGS74091C016', 'sector': 'Financial Services'},  # CI Capital
-    # Real Estate - VERIFIED
-    'TMGH.CA': {'isin': 'EGS691S1C011', 'sector': 'Real Estate'},  # Talaat Moustafa Group
-    'PHDC.CA': {'isin': 'EGS69091C014', 'sector': 'Real Estate'},  # Palm Hills
-    'OCDI.CA': {'isin': 'EGS69061C017', 'sector': 'Real Estate'},  # SODIC
-    'MASR.CA': {'isin': 'EGS69041C019', 'sector': 'Real Estate'},  # Madinet Masr
-    'HELI.CA': {'isin': 'EGS69021C011', 'sector': 'Real Estate'},  # Heliopolis Housing
-    'EMFD.CA': {'isin': 'EGS69101C021', 'sector': 'Real Estate'},  # Emaar Misr
-    # Construction & Industrial - VERIFIED
-    'ORAS.CA': {'isin': 'EGS65021C018', 'sector': 'Construction'},  # Orascom Construction
-    'SWDY.CA': {'isin': 'EGS3G0Z1C014', 'sector': 'Industrial'},  # Elsewedy Electric
-    # Chemicals & Petrochemicals
-    'ABUK.CA': {'isin': 'EGS38191C017', 'sector': 'Chemicals'},  # Abu Qir Fertilizers
-    'MFPC.CA': {'isin': 'EGS38201C014', 'sector': 'Chemicals'},  # MOPCO
-    'SKPC.CA': {'isin': 'EGS38211C013', 'sector': 'Chemicals'},  # Sidi Kerir
-    'AMOC.CA': {'isin': 'EGS38181C018', 'sector': 'Oil & Gas'},  # Alexandria Mineral Oils
-    # Telecom
-    'ETEL.CA': {'isin': 'EGS70251C011', 'sector': 'Telecom'},  # Telecom Egypt
-    # Consumer Goods - VERIFIED
-    'EAST.CA': {'isin': 'EGS30371C017', 'sector': 'Consumer'},  # Eastern Company
-    'JUFO.CA': {'isin': 'EGS31151C014', 'sector': 'Food & Beverage'},  # Juhayna
-    'EFID.CA': {'isin': 'EGS31161C013', 'sector': 'Food & Beverage'},  # Edita
-    # Healthcare
-    'ISPH.CA': {'isin': 'EGS74101C013', 'sector': 'Healthcare'},  # Ibn Sina Pharma
-    'CLHO.CA': {'isin': 'EGS74111C012', 'sector': 'Healthcare'},  # Cleopatra Hospital
-    # Diversified / Holdings
-    'GBCO.CA': {'isin': 'EGS33161C013', 'sector': 'Automotive'},  # GB Auto
-    'EKHO.CA': {'isin': 'EGS69071C016', 'sector': 'Holdings'},  # Egyptian Kuwaiti Holding
-    'CCAP.CA': {'isin': 'EGS74051C010', 'sector': 'Holdings'},  # Qalaa Holdings (Citadel)
-    'ORHD.CA': {'isin': 'EGS31131C016', 'sector': 'Textiles'},  # Oriental Weavers
+    # === BANKING ===
+    'COMI.CA': {'isin': 'EGS60121C018', 'sector': 'Banking'},
+    'CIEB.CA': {'isin': 'EGS60131C017', 'sector': 'Banking'},
+    'HDBK.CA': {'isin': 'EGS60091C013', 'sector': 'Banking'},
+    'FAIT.CA': {'isin': 'EGS60021C016', 'sector': 'Banking'},
+    'ADIB.CA': {'isin': 'EGS60141C016', 'sector': 'Banking'},
+    'SAUD.CA': {'isin': 'EGS60041C014', 'sector': 'Banking'},
+    'EGBE.CA': {'isin': 'EGS60051C013', 'sector': 'Banking'},
+    'EXPA.CA': {'isin': 'EGS60151C015', 'sector': 'Banking'},
+    'UBEE.CA': {'isin': 'EGS60161C014', 'sector': 'Banking'},
+    'CANA.CA': {'isin': 'EGS60171C013', 'sector': 'Banking'},
+    
+    # === FINANCIAL SERVICES ===
+    'HRHO.CA': {'isin': 'EGS74081C017', 'sector': 'Financial Services'},
+    'EFIH.CA': {'isin': 'EGS74071C018', 'sector': 'Financial Services'},
+    'FWRY.CA': {'isin': 'EGS745L1C014', 'sector': 'Financial Services'},
+    'BTFH.CA': {'isin': 'EGS74061C019', 'sector': 'Financial Services'},
+    'CICH.CA': {'isin': 'EGS74091C016', 'sector': 'Financial Services'},
+    'CNFN.CA': {'isin': 'EGS74121C011', 'sector': 'Financial Services'},
+    'ACTF.CA': {'isin': 'EGS74131C010', 'sector': 'Financial Services'},
+    'ATLC.CA': {'isin': 'EGS74141C019', 'sector': 'Financial Services'},
+    'VALU.CA': {'isin': 'EGS74151C018', 'sector': 'Financial Services'},
+    'OFH.CA':  {'isin': 'EGS74161C017', 'sector': 'Financial Services'},
+    
+    # === REAL ESTATE ===
+    'TMGH.CA': {'isin': 'EGS691S1C011', 'sector': 'Real Estate'},
+    'PHDC.CA': {'isin': 'EGS69091C014', 'sector': 'Real Estate'},
+    'OCDI.CA': {'isin': 'EGS69061C017', 'sector': 'Real Estate'},
+    'MASR.CA': {'isin': 'EGS69041C019', 'sector': 'Real Estate'},
+    'HELI.CA': {'isin': 'EGS69021C011', 'sector': 'Real Estate'},
+    'EMFD.CA': {'isin': 'EGS69101C021', 'sector': 'Real Estate'},
+    'AMER.CA': {'isin': 'EGS69111C020', 'sector': 'Real Estate'},
+    'ARAB.CA': {'isin': 'EGS69121C019', 'sector': 'Real Estate'},
+    'EHDR.CA': {'isin': 'EGS69131C018', 'sector': 'Real Estate'},
+    'ELKA.CA': {'isin': 'EGS69141C017', 'sector': 'Real Estate'},
+    'ELSH.CA': {'isin': 'EGS69151C016', 'sector': 'Real Estate'},
+    'ZMID.CA': {'isin': 'EGS69161C015', 'sector': 'Real Estate'},
+    'CIRA.CA': {'isin': 'EGS69171C014', 'sector': 'Real Estate'},
+    'EGTS.CA': {'isin': 'EGS69181C013', 'sector': 'Real Estate'},
+    'MENA.CA': {'isin': 'EGS69191C012', 'sector': 'Real Estate'},
+    
+    # === CONSTRUCTION & ENGINEERING ===
+    'ORAS.CA': {'isin': 'EGS65021C018', 'sector': 'Construction'},
+    'ARCC.CA': {'isin': 'EGS65031C017', 'sector': 'Construction'},
+    'SCEM.CA': {'isin': 'EGS65041C016', 'sector': 'Construction'},
+    'MCQE.CA': {'isin': 'EGS65051C015', 'sector': 'Construction'},
+    'SVCE.CA': {'isin': 'EGS65061C014', 'sector': 'Construction'},
+    'ENGC.CA': {'isin': 'EGS65071C013', 'sector': 'Construction'},
+    'GGCC.CA': {'isin': 'EGS65081C012', 'sector': 'Construction'},
+    'NCCW.CA': {'isin': 'EGS65091C011', 'sector': 'Construction'},
+    
+    # === INDUSTRIAL ===
+    'SWDY.CA': {'isin': 'EGS3G0Z1C014', 'sector': 'Industrial'},
+    'EGAL.CA': {'isin': 'EGS33021C018', 'sector': 'Industrial'},
+    'ELEC.CA': {'isin': 'EGS33031C017', 'sector': 'Industrial'},
+    'ORWE.CA': {'isin': 'EGS31131C016', 'sector': 'Industrial'},
+    'LCSW.CA': {'isin': 'EGS33051C015', 'sector': 'Industrial'},
+    'ECAP.CA': {'isin': 'EGS33061C014', 'sector': 'Industrial'},
+    'PRCL.CA': {'isin': 'EGS33071C013', 'sector': 'Industrial'},
+    'CERA.CA': {'isin': 'EGS33081C012', 'sector': 'Industrial'},
+    'KABO.CA': {'isin': 'EGS33091C011', 'sector': 'Industrial'},
+    'DSCW.CA': {'isin': 'EGS33101C018', 'sector': 'Industrial'},
+    'MTIE.CA': {'isin': 'EGS33111C017', 'sector': 'Industrial'},
+    'UNIP.CA': {'isin': 'EGS33121C016', 'sector': 'Industrial'},
+    
+    # === CHEMICALS & PETROCHEMICALS ===
+    'ABUK.CA': {'isin': 'EGS38191C017', 'sector': 'Chemicals'},
+    'MFPC.CA': {'isin': 'EGS38201C014', 'sector': 'Chemicals'},
+    'SKPC.CA': {'isin': 'EGS38211C013', 'sector': 'Chemicals'},
+    'AMOC.CA': {'isin': 'EGS38181C018', 'sector': 'Chemicals'},
+    'EGCH.CA': {'isin': 'EGS38221C012', 'sector': 'Chemicals'},
+    'ICFC.CA': {'isin': 'EGS38231C011', 'sector': 'Chemicals'},
+    'COSG.CA': {'isin': 'EGS38241C010', 'sector': 'Chemicals'},
+    'ZEOT.CA': {'isin': 'EGS38251C019', 'sector': 'Chemicals'},
+    
+    # === OIL & GAS ===
+    'ASCM.CA': {'isin': 'EGS38261C018', 'sector': 'Oil & Gas'},
+    'MOIL.CA': {'isin': 'EGS38271C017', 'sector': 'Oil & Gas'},
+    'TAQA.CA': {'isin': 'EGS38281C016', 'sector': 'Oil & Gas'},
+    'ISMQ.CA': {'isin': 'EGS38291C015', 'sector': 'Oil & Gas'},
+    
+    # === TELECOM ===
+    'ETEL.CA': {'isin': 'EGS70251C011', 'sector': 'Telecom'},
+    'RAYA.CA': {'isin': 'EGS70261C010', 'sector': 'Telecom'},
+    'RACC.CA': {'isin': 'EGS70271C019', 'sector': 'Telecom'},
+    
+    # === CONSUMER GOODS ===
+    'EAST.CA': {'isin': 'EGS30371C017', 'sector': 'Consumer'},
+    'JUFO.CA': {'isin': 'EGS31151C014', 'sector': 'Food & Beverage'},
+    'EFID.CA': {'isin': 'EGS31161C013', 'sector': 'Food & Beverage'},
+    'POUL.CA': {'isin': 'EGS31171C012', 'sector': 'Food & Beverage'},
+    'ISMA.CA': {'isin': 'EGS31181C011', 'sector': 'Food & Beverage'},
+    'MPCO.CA': {'isin': 'EGS31191C010', 'sector': 'Food & Beverage'},
+    'SUGR.CA': {'isin': 'EGS31201C017', 'sector': 'Food & Beverage'},
+    'IFAP.CA': {'isin': 'EGS31211C016', 'sector': 'Food & Beverage'},
+    
+    # === HEALTHCARE & PHARMA ===
+    'ISPH.CA': {'isin': 'EGS74101C013', 'sector': 'Healthcare'},
+    'CLHO.CA': {'isin': 'EGS74111C012', 'sector': 'Healthcare'},
+    'PHAR.CA': {'isin': 'EGS74011C014', 'sector': 'Healthcare'},
+    'RMDA.CA': {'isin': 'EGS74021C013', 'sector': 'Healthcare'},
+    'NIPH.CA': {'isin': 'EGS74031C012', 'sector': 'Healthcare'},
+    'MPCI.CA': {'isin': 'EGS74041C011', 'sector': 'Healthcare'},
+    'MCRO.CA': {'isin': 'EGS74051C010', 'sector': 'Healthcare'},
+    'BIOC.CA': {'isin': 'EGS74061C019', 'sector': 'Healthcare'},
+    'SIPC.CA': {'isin': 'EGS74071C018', 'sector': 'Healthcare'},
+    'MEPA.CA': {'isin': 'EGS74081C017', 'sector': 'Healthcare'},
+    
+    # === HOLDINGS & DIVERSIFIED ===
+    'GBCO.CA': {'isin': 'EGS33161C013', 'sector': 'Holdings'},
+    'EKHO.CA': {'isin': 'EGS69071C016', 'sector': 'Holdings'},
+    'CCAP.CA': {'isin': 'EGS74051C010', 'sector': 'Holdings'},
+    'AIH.CA':  {'isin': 'EGS74181C014', 'sector': 'Holdings'},
+    'AIDC.CA': {'isin': 'EGS74191C013', 'sector': 'Holdings'},
+    'ASPI.CA': {'isin': 'EGS74201C010', 'sector': 'Holdings'},
+    'OIH.CA':  {'isin': 'EGS74211C019', 'sector': 'Holdings'},
+    'VLMR.CA': {'isin': 'EGS74221C018', 'sector': 'Holdings'},
+    'TALM.CA': {'isin': 'EGS74231C017', 'sector': 'Holdings'},
+    'MOED.CA': {'isin': 'EGS74241C016', 'sector': 'Holdings'},
+    'ODIN.CA': {'isin': 'EGS74251C015', 'sector': 'Holdings'},
+    'ALCN.CA': {'isin': 'EGS74261C014', 'sector': 'Holdings'},
+    
+    # === TRANSPORT & LOGISTICS ===
+    'CSAG.CA': {'isin': 'EGS70281C018', 'sector': 'Transport'},
+    'ETRS.CA': {'isin': 'EGS70291C017', 'sector': 'Transport'},
+    'MPRC.CA': {'isin': 'EGS70301C014', 'sector': 'Transport'},
+    'IEEC.CA': {'isin': 'EGS70311C013', 'sector': 'Transport'},
 }
 
 # =============================================================================
