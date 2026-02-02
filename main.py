@@ -3,6 +3,10 @@ EGX Macro Significance Study - Main Experiment Runner
 ======================================================
 Compares Endogenous-only model vs Exogenous-enhanced model
 using identical feature engineering, windowing, and thresholding.
+
+Includes:
+- Correlation-based feature filtering (removes multicollinearity)
+- Feature importance analysis before training
 """
 
 import sys
@@ -24,17 +28,22 @@ from src.data_loader import (
 )
 from src.models import train_model, get_percentile_threshold, evaluate_model
 from src.validation import diebold_mariano_test, compute_squared_loss, is_significant
+from src.feature_selection import remove_correlated_features, analyze_feature_importance
 
 warnings.filterwarnings('ignore')
 
 RESULTS_DIR = Path(__file__).parent / 'results'
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
+# Configuration
+CORRELATION_THRESHOLD = 0.85  # Features with correlation > this are filtered
+
 
 def run_experiment():
     print("=" * 70)
     print("EGX MACRO SIGNIFICANCE STUDY")
     print("Endogenous (Technical) vs Exogenous (Technical + Macro)")
+    print("With Correlation Filtering (threshold={})".format(CORRELATION_THRESHOLD))
     print("=" * 70)
     
     # 1. Load Data
@@ -48,6 +57,7 @@ def run_experiment():
     print(f"\n[2] Running Experiment for {len(tickers)} tickers...")
     
     results = []
+    feature_importance_all = []
     
     for ticker in tqdm(tickers):
         df_ticker = stocks[stocks['Ticker'] == ticker].copy()
@@ -67,25 +77,54 @@ def run_experiment():
         samples_b = create_exogenous_samples(df_ticker, macro)
         data_b = prepare_datasets(samples_b)
         
-        # Train Models
-        model_a = train_model(data_a['X_train'], data_a['y_train'],
-                              data_a['X_val'], data_a['y_val'])
-        model_b = train_model(data_b['X_train'], data_b['y_train'],
-                              data_b['X_val'], data_b['y_val'])
+        # --- CORRELATION FILTERING (Before Training) ---
+        # Filter features for Endogenous pipeline
+        X_train_a_filtered, dropped_a = remove_correlated_features(
+            data_a['X_train'], data_a['y_train'], 
+            threshold=CORRELATION_THRESHOLD, verbose=False
+        )
+        
+        # Apply same filter to val/test
+        keep_cols_a = X_train_a_filtered.columns.tolist()
+        X_val_a_filtered = data_a['X_val'][keep_cols_a]
+        X_test_a_filtered = data_a['X_test'][keep_cols_a]
+        
+        # Filter features for Exogenous pipeline
+        X_train_b_filtered, dropped_b = remove_correlated_features(
+            data_b['X_train'], data_b['y_train'], 
+            threshold=CORRELATION_THRESHOLD, verbose=False
+        )
+        
+        # Apply same filter to val/test
+        keep_cols_b = X_train_b_filtered.columns.tolist()
+        X_val_b_filtered = data_b['X_val'][keep_cols_b]
+        X_test_b_filtered = data_b['X_test'][keep_cols_b]
+        
+        # --- Feature Importance Analysis (for reporting) ---
+        if ticker == tickers[0]:  # Only for first ticker (representative)
+            importance_b = analyze_feature_importance(X_train_b_filtered, data_b['y_train'])
+            importance_b['Ticker'] = ticker
+            feature_importance_all.append(importance_b)
+        
+        # --- Train Models ---
+        model_a = train_model(X_train_a_filtered, data_a['y_train'],
+                              X_val_a_filtered, data_a['y_val'])
+        model_b = train_model(X_train_b_filtered, data_b['y_train'],
+                              X_val_b_filtered, data_b['y_val'])
         
         # Get thresholds (fixed percentile)
-        thresh_a = get_percentile_threshold(model_a, data_a['X_val'], quantile=0.40)
-        thresh_b = get_percentile_threshold(model_b, data_b['X_val'], quantile=0.40)
+        thresh_a = get_percentile_threshold(model_a, X_val_a_filtered, quantile=0.40)
+        thresh_b = get_percentile_threshold(model_b, X_val_b_filtered, quantile=0.40)
         
         # Evaluate on Test Set
-        y_true = data_a['y_test']  # Same for both (same samples, different features)
+        y_true = data_a['y_test']
         
-        metrics_a = evaluate_model(model_a, data_a['X_test'], y_true, thresh_a)
-        metrics_b = evaluate_model(model_b, data_b['X_test'], y_true, thresh_b)
+        metrics_a = evaluate_model(model_a, X_test_a_filtered, y_true, thresh_a)
+        metrics_b = evaluate_model(model_b, X_test_b_filtered, y_true, thresh_b)
         
         # Statistical Test (Diebold-Mariano)
-        probs_a = model_a.predict_proba(data_a['X_test'])[:, 1]
-        probs_b = model_b.predict_proba(data_b['X_test'])[:, 1]
+        probs_a = model_a.predict_proba(X_test_a_filtered)[:, 1]
+        probs_b = model_b.predict_proba(X_test_b_filtered)[:, 1]
         
         loss_a = compute_squared_loss(y_true.values, probs_a)
         loss_b = compute_squared_loss(y_true.values, probs_b)
@@ -97,6 +136,10 @@ def run_experiment():
             'Ticker': ticker,
             'Samples': len(samples_a),
             'Test_Size': len(y_true),
+            
+            # Feature counts after filtering
+            'Endo_Features': len(keep_cols_a),
+            'Exo_Features': len(keep_cols_b),
             
             # Model A (Endogenous)
             'Endo_F1': metrics_a['f1'],
@@ -124,21 +167,29 @@ def run_experiment():
         # Live log significant improvements
         if is_significant(p_value) and res['F1_Lift'] > 0:
             print(f"  {ticker}: Lift={res['F1_Lift']*100:.1f}% "
-                  f"(Endo F1={metrics_a['f1']:.2f} -> Exo F1={metrics_b['f1']:.2f})")
+                  f"(Endo F1={metrics_a['f1']:.2f} -> Exo F1={metrics_b['f1']:.2f}) "
+                  f"[{len(keep_cols_a)}->{len(keep_cols_b)} features]")
     
     # Save Results
     df_results = pd.DataFrame(results)
     output_path = RESULTS_DIR / 'experiment_results.csv'
     df_results.to_csv(output_path, index=False)
     
+    # Save Feature Importance
+    if feature_importance_all:
+        df_importance = pd.concat(feature_importance_all)
+        df_importance.to_csv(RESULTS_DIR / 'feature_importance.csv', index=False)
+    
     # Summary
     print("\n" + "=" * 70)
     print("EXPERIMENT SUMMARY")
     print("=" * 70)
     print(f"Total Tickers: {len(df_results)}")
+    print(f"Avg Endo Features: {df_results['Endo_Features'].mean():.0f}")
+    print(f"Avg Exo Features: {df_results['Exo_Features'].mean():.0f}")
     
     sig_better = df_results[(df_results['Significant']) & (df_results['Exo_Better'])]
-    print(f"Exogenous Significantly Better: {len(sig_better)} ({100*len(sig_better)/len(df_results):.1f}%)")
+    print(f"\nExogenous Significantly Better: {len(sig_better)} ({100*len(sig_better)/len(df_results):.1f}%)")
     
     mean_lift = df_results['F1_Lift'].mean() * 100
     print(f"Mean F1 Lift: {mean_lift:+.2f}%")
