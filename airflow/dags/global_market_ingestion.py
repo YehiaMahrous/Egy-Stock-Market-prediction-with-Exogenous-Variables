@@ -99,8 +99,11 @@ def fetch_global_data(**context):
     
     merged = merged.sort_values('date').reset_index(drop=True)
     
+
+    
+    
     # Push to XCom for next task
-    context['ti'].xcom_push(key='new_data', value=merged.to_json())
+    context['ti'].xcom_push(key='new_data', value=merged.to_json(orient='split', date_format='iso'))
     
     print(f"Fetched {len(merged)} new rows")
     return len(merged)
@@ -114,7 +117,7 @@ def update_historical_data(**context):
     
     # Get new data from XCom
     new_data_json = context['ti'].xcom_pull(key='new_data', task_ids='fetch_global_data')
-    new_data = pd.read_json(new_data_json)
+    new_data = pd.read_json(new_data_json, orient='split')
     new_data['date'] = pd.to_datetime(new_data['date'])
     
     # Ensure directory exists

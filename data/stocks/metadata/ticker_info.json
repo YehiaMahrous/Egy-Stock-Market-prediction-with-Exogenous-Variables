@@ -138,5 +138,261 @@
   "ORHD.CA": {
     "isin": "N/A",
     "sector": "N/A"
+  },
+  "CANA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "CNFN.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ATLC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "OFH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "AMER.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ARAB.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "EHDR.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ELKA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ELSH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ZMID.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "CIRA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "EGTS.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MENA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ARCC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "SCEM.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MCQE.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "SVCE.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ENGC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "GGCC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "NCCW.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "EGAL.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ELEC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ORWE.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "LCSW.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ECAP.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "PRCL.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "CERA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "KABO.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "DSCW.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MTIE.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "UNIP.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "EGCH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ICFC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "COSG.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ZEOT.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ASCM.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MOIL.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ISMQ.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "RAYA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "RACC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "POUL.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ISMA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MPCO.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "SUGR.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "IFAP.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "PHAR.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "RMDA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "NIPH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MPCI.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MCRO.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "BIOC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "SIPC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MEPA.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "AIH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ASPI.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "OIH.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "TALM.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MOED.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ODIN.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ALCN.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "CSAG.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "ETRS.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "MPRC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
+  },
+  "IEEC.CA": {
+    "isin": "N/A",
+    "sector": "N/A"
   }
 }
