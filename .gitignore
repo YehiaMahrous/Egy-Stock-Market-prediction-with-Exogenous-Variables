@@ -68,6 +68,10 @@ airflow/airflow-webserver.pid
 *.h5
 *.pkl
 
+# Large processed feature CSVs (regenerated from data_loader.py)
+data/processed/endo_features_all_stocks.csv
+data/processed/exo_features_all_stocks.csv
+
 *.gguf
 *.bin
 models/*.bin
